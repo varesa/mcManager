@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+	<link rel="stylesheet" type="text/css" href="{% static "styles.css" %}">
+	<script type="text/javascript">
+	    {% block javascript %}  {% endblock %} 
+	</script> 
+	{% block head %} {% endblock %}
+    </head>
+    <body>
+	<div id="div_top">
+	    <div id="div_title">
+		<header>
+		    <a href="/"><img src="{% static "servermanager_logo.png" %}"></a>
+		</header>
+	    </div>
+	    <div id="div_menu">
+		<nav>{% block menu %}{% endblock %}</nav> <div style="position: absolute; top:0px; right: 0px; line-height: 50px;" align="right">
+		{% if request.user.is_authenticated %} 	You are logged in as {{ user.username }}. <a href="/logout">Logout</a> &nbsp;&nbsp;
+		{% else %} 				You are not logged in. <a href="/login/">Login</a> &nbsp;&nbsp;
+		{% endif %}</div>
+	    </div>
+	</div><br>
+	
+	<div id="div_middle">
+	    <div id="div_sidebar" style="padding: 10px">
+		{% block sidebar %}{% endblock %}
+	    </div>
+	    <div id="div_main" style="padding: 10px">
+		{% block content %} {% endblock %}
+	    </div>
+	</div>
+	
+	<div id="div_bottom">
+	    <footer>
+		Server management tool by Esa Varemo
+	    </footer>
+	</div>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block menu%}<a href="/status/index/">Status</a> <a href="/manage/index/">Management</a> <a href="/admin_/index/"><b>Administration</b></a>{% endblock %}
+
+{% block sidebar %}<a href="/admin_/users/">Users</a><br>
+<a href="/admin_/permissions/">Perms</a><br>
+<a href="/admin_/servers/">Servers</a><br>
+<a href="/admin_/settings/">Settings</a><br>
+{% endblock %}
+
+{% block content %}
+    Please choose task from the panel on left.
+{% endblock %}

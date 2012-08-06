@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block menu%}<a href="/status/index/">Status</a> <a href="/manage/index/">Management</a> <a href="/admin_/index/"><b>Administration</b></a>{% endblock %}
+
+{% block sidebar %}
+    <a href="/admin_/users/">Users</a><br>
+    <a href="/admin_/permissions/">Permissions</a><br>
+    <a href="/admin_/settings/">Settings</a><br>
+{% endblock %}
+
+{% block content %}
+    {% if servers %}
+        <table>
+        {% for server in servers %}
+            <tr> <td>{{ server.name }}&nbsp;&nbsp;&nbsp;</td><td>{{ server.get_state_display }}</td></tr>
+        {% endfor%}
+        </table>
+    {% else %}
+    There are no configured servers, head over to the Administration page to create one.
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,3 @@
+[submodule "manager/serverAPI"]
+	path = manager/serverAPI
+	url = git@github.com:varesa/pyServerManage.git

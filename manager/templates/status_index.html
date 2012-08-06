@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load serverAPITags %}
+
+{% block javascript %}
+    function startserver(id) {
+	xmlhttp= new XMLHttpRequest();
+	xmlhttp.open('get','/_start_server/' + id, false);
+	xmlhttp.send();
+	//alert(xmlhttp.responseText);
+	setTimeout(reload,1000);
+    }
+
+    function stopserver(id) {
+	xmlhttp= new XMLHttpRequest();
+	xmlhttp.open('get','/_stop_server/' + id, false);
+	xmlhttp.send();
+	//alert(xmlhttp.responseText);
+	setTimeout(reload,6000);
+    }
+    
+    function reload() {
+	location.reload(true);
+    }
+    
+{% endblock %}
+
+{% block head %}<meta http-equiv="refresh" content="10">{% endblock %}
+
+{% block menu%}<a href="/status/index"><b>Status</b></a> <a href="/manage/index/">Management</a> <a href="/admin_/index/">Administration</a>{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+    {% if servers %}
+        <table>
+    	    <tr>
+    		<th align="left">Name&nbsp;&nbsp;&nbsp;</th>
+    		<th align="left">Port&nbsp;&nbsp;&nbsp;</th>
+    		<th align="left">Status&nbsp;&nbsp;&nbsp;</th>
+    		<th align="left">Players&nbsp;&nbsp;&nbsp;</th>
+    		<th align="left">&nbsp;&nbsp;&nbsp;</th>
+    	    </tr>
+    	    {% for server in servers %}
+    	    {% with status=server.name|status %}
+            <tr> 
+                <td>{{ server.name }}&nbsp;&nbsp;&nbsp;</td>
+                <td>{{ server.port }}&nbsp;&nbsp;&nbsp;</td>
+                <td>{{ server.name|status }}&nbsp;&nbsp;&nbsp;</td>
+            	<td>{% if status == 'Running' %}{{ server.port|players }}{% else %}{% endif %}</td>
+        	    <td>{% if status == 'Running' %}<a href="" onclick="stopserver({{server.id}})">Stop</a>
+                	{% else %}<a href="" onclick="startserver({{server.id}})">Start</a>
+                	{% endif %}&nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+            {% endwith %}
+    	    {% endfor%}
+        </table>
+    {% else %}
+    There are no configured servers, head over to the Administration page to create one.
+    {% endif %}
+{% endblock %}
+

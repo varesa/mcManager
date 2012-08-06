@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block menu%}{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<br>You have to log in in order to use this page<br>
+        <form action="/login_action/" method="post">
+            <input type="hidden" name="location" value="{{ location }}">
+            {% csrf_token %}
+            <p style="color: red">{{ errormsg }}<p>
+            <table>
+                <tr><td>Username:&nbsp;&nbsp;</td><td>  <input type="text" name="username">     </td></tr>
+                <tr><td>Password:</td>            <td>  <input type="password" name="password"> </td></tr>
+                <tr><td> </td>                    <td>  <input type="submit" value="Kirjaudu">  </td></tr>
+            </table>
+        </form>
+{% endblock %}
+

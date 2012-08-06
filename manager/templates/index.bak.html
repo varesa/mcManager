@@ -1,0 +1,58 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+	<link rel="stylesheet" type="text/css" href="{% static "styles.css" %}"
+    </hea>
+    <body>
+	<div id="div_top">
+	    <div id="div_title">
+		
+		<header>
+		    <a href="/"><img src="{% static "servermanager_logo.png" %}"></a>
+		</header>
+	    
+	    </div>
+	    <div id="div_menu">
+		
+		<nav>
+		    Item 1  Item 2  Item 3
+		</nav>
+		<p align="right">You are logged in as {{ username }}. <a href="/logout">Logout</a> &nbsp;&nbsp;</p>
+		
+	    </div>
+	</div><br>
+	
+	<div id="div_middle">
+	    <div id="div_sidebar">
+	    
+		<aside>
+		    Action 1<br>
+		    Action 2<br>
+		    Action 3
+		</aside>
+	    
+	    </div>
+	    <div id="div_main">
+		
+		<section>
+		    {% if servers %}
+    
+		    {% else %}
+		    No servers found, create one now:
+		    {% endif %}
+		    <a href="/servers/create">Create new server</a>
+		</section>
+		
+	    </div>
+	    
+	</div>
+	
+	<div id="div_bottom">
+	    <footer>
+		Server management tool by Esa Varemo
+	    </footer>
+	    
+	</div>
+    </body>
+</html>

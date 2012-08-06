@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block menu%}<a href="/status/index">Status</a> <a href="/manage/index/"><b>Management</b></a> <a href="/admin_/index/">Administration</a>{% endblock %}
+
+{% block sidebar %}
+    {% for server_ in servers %}
+        {% if server_.id == server.id %}
+            <b><a href="/manage/index/{{ server_.id }}">{{ server_.name }}</a></b><br>
+            <a href="">- console</a><br>
+            <a href="">- update</a><br>
+        {% else %}
+            <a href="/manage/index/{{ server_.id }}">{{ server_.name }}</a></b><br>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    {% if server %}
+        {{ server.name }}:{{server.port}}
+    {% else %}
+        Please choose a server to manage from the sidebar on the left
+    {% endif %}
+{% endblock %}
