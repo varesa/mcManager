@@ -47,7 +47,7 @@
                 <td>{{ server.name }}&nbsp;&nbsp;&nbsp;</td>
                 <td>{{ server.port }}&nbsp;&nbsp;&nbsp;</td>
                 <td>{{ server.name|status }}&nbsp;&nbsp;&nbsp;</td>
-            	<td>{% if status == 'Running' %}{{ server.port|players }}{% else %}{% endif %}</td>
+            	<td>{% if status == 'Running' %}{{ server.port|players }}{% else %}-{% endif %}</td>
         	    <td>{% if status == 'Running' %}<a href="" onclick="stopserver({{server.id}})">Stop</a>
                 	{% else %}<a href="" onclick="startserver({{server.id}})">Start</a>
                 	{% endif %}&nbsp;&nbsp;&nbsp;

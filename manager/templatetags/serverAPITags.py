@@ -1,5 +1,7 @@
 import sys
 import signal
+import time
+import socket
 
 from django import template
 from manager import serverAPI
@@ -21,16 +23,10 @@ def status(name):
 
 def players(port):
     """Returns the number of players on a server"""
-#    def timeouthandler(signum, frame):
-#	raise TimeoutException()
-    
-#    signal.signal(signal.SIGALRM, timeouthandler)
-#    signal.alarm(2)
-    
-    #try:
-#	return MinecraftQuery("localhost",port).get_status()['numplayers']
-#    except TimeoutException:
-    return "-"
+    try:
+	return MinecraftQuery("localhost",port,timeout=0.1).get_status()['numplayers']
+    except socket.timeout:
+	return "timeout"
 
 register.filter('status', status)
 register.filter('players', players)
