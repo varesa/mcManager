@@ -5,11 +5,15 @@ from django.shortcuts import get_list_or_404, get_object_or_404, render_to_respo
 from django.contrib.auth import authenticate, login, logout
 
 from manager.models import Server
+from django.contrib.auth.models import User
 
 def status_index(request):
     """Shows the status of servers"""
     if request.user.is_authenticated():
-        servers = list(Server.objects.all())
+	if request.user.is_staff:
+    	    servers = list(Server.objects.all())
+        else:
+            servers = list(request.user.server_set.all())
         
         
         return render_to_response('status_index.html', {'servers': servers}, context_instance=RequestContext(request))
